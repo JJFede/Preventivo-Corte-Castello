@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventivatore Corte Castello</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --border-color: #bdc3c7;
+            --bg-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.3;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .grid-anagrafica {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            width: 140px;
+            font-size: 13px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group input[type="date"] {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        .note {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .row-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            font-size: 13.5px;
+        }
+
+        .row-item:last-child {
+            border-bottom: none;
+        }
+
+        .left-zone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .right-zone {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 140px;
+            justify-content: flex-end;
+        }
+
+        .price-tag {
+            width: 60px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .input-qty {
+            width: 50px;
+            padding: 3px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e8f4fd;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border: 1px solid #bce0fd;
+            font-weight: bold;
+            font-size: 16px;
+            color: #1a5276;
+        }
+
+        .grand-total-box {
+            background: #eaf2f8;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn-submit {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-submit:hover {
+            background-color: #219653;
+        }
+
+        /* Ottimizzazione Specifica Stampa A4 Singola Pagina */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 10mm 15mm 10mm 15mm;
+            }
+            
+            body {
+                background: white;
+                color: #000;
+                padding: 0;
+                margin: 0;
+                font-size: 12px;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .grid-anagrafica {
+                padding: 10px;
+                margin-bottom: 15px;
+                background: #fff !important;
+                border: 1px solid #000;
+            }
+
+            .section-title {
+                font-size: 13px;
+                margin-top: 12px;
+                margin-bottom: 6px;
+                border-bottom: 1px solid #000;
+            }
+
+            .row-item {
+                padding: 4px 0;
+                font-size: 12px;
+                page-break-inside: avoid;
+            }
+
+            .input-qty, input[type="text"], input[type="tel"], input[type="email"], input[type="date"] {
+                border: 1px solid #000 !important;
+                background: transparent !important;
+            }
+
+            .total-box {
+                background: #fff !important;
+                border: 1px solid #000 !important;
+                color: #000 !important;
+                padding: 8px 15px;
+                margin-top: 12px;
+                font-size: 14px;
+                page-break-inside: avoid;
+            }
+
+            .grand-total-box {
+                font-size: 15px;
+                border: 2px solid #000 !important;
+            }
+
+            .btn-container, input[type="radio"], input[type="checkbox"] {
+                /* Manteniamo i radio visibili ma i pulsanti nascosti */
+            }
+            
+            .btn-container {
+                display: none !important;
+            }
+            
+            /* Previene l'inserimento di pagine extra vuote */
+            html, body {
+                height: 99%;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Preventivatore Corte Castello</h1>
+    
+    <!-- Anagrafica -->
+    <div class="grid-anagrafica">
+        <div class="form-group">
+            <label for="nome">Cognome e nome:</label>
+            <input type="text" id="nome" value="PINCO PAOLINO">
+        </div>
+        <div class="form-group">
+            <label for="cell">Cell.:</label>
+            <input type="tel" id="cell" value="123/456789">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="paperoga@topolinia.qua">
+        </div>
+        <div class="form-group">
+            <label for="data">EVENTO DEL:</label>
+            <input type="date" id="data">
+        </div>
+    </div>
+
+    <form id="preventivatoreForm">
+        <!-- 1) Tariffa Base -->
+        <div class="section-title">1) Tariffa base <span style="font-weight: normal; font-size: 11px;">(seleziona un'opzione scelta)</span></div>
+        
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="tariffa_base" value="300" id="tb1" onchange="calcolaTotale()">
+                <label for="tb1">Banchetto per Cerimonia *</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">300 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="tariffa_base" value="200" id="tb2" onchange="calcolaTotale()">
+                <label for="tb2">Evento Aziendale/Commerciale *</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">200 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="tariffa_base" value="150" id="tb3" onchange="calcolaTotale()">
+                <label for="tb3">Festa privata *</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">150 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="tariffa_base" value="50" id="tb4" onchange="calcolaTotale()">
+                <label for="tb4">Uso Corte Castello all'ora</label>
+            </div>
+            <div class="right-zone">
+                <input type="number" id="ore_corte" class="input-qty" min="0" value="0" placeholder="Ore" oninput="calcolaTotale()">
+                <span class="price-tag">50 €/h</span>
+            </div>
+        </div>
+        <div class="note">(*) si intende per la giornata intera, compreso allestimento e sgombero locali. Eventuali dilazioni temporali sono da concordare.</div>
+
+        <!-- 2) Variabili Logistiche -->
+        <div class="section-title">2) Variabili logistiche</div>
+        
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="checkbox" id="alta_stagione" onchange="calcolaTotale()">
+                <label for="alta_stagione">Alta Stagione / Sabato / Domenica</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">0 €</span></div>
+        </div>
+
+        <div style="margin-top: 8px; font-weight: 600; font-size: 12px; color: #555;">Numero totale invitati:</div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="invitati" value="20" id="inv1" onchange="calcolaTotale()">
+                <label for="inv1">fino a 30</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">20 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="invitations" value="30" id="inv2" name="invitati" onchange="calcolaTotale()">
+                <input type="radio" name="invitati" value="30" id="inv2" onchange="calcolaTotale()">
+                <label for="inv2">fino a 50</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">30 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="invitati" value="50" id="inv3" onchange="calcolaTotale()">
+                <label for="inv3">fino a 100</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">50 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="invitati" value="100" id="inv4" onchange="calcolaTotale()">
+                <label for="inv4">fino a 200</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">100 €</span></div>
+        </div>
+
+        <div style="margin-top: 8px; font-weight: 600; font-size: 12px; color: #555;">Servizi Energetici:</div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="checkbox" id="allaccio_energetico" value="10" onchange="calcolaTotale()">
+                <label for="allaccio_energetico">Allaccio energetico</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">10 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="checkbox" id="riscaldamento_die" value="30" onchange="calcolaTotale()">
+                <label for="riscaldamento_die">utilizzo riscaldamento/condizionamento pro die</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">30 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="checkbox" id="riscaldamento_ora" value="10" onchange="calcolaTotale()">
+                <label for="riscaldamento_ora">utilizzo riscaldamento/condizionamento all'ora</label>
+            </div>
+            <div class="right-zone">
+                <input type="number" id="ore_riscaldamento" class="input-qty" min="0" value="0" placeholder="Ore" oninput="calcolaTotale()">
+                <span class="price-tag">10 €/h</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 8px; font-weight: 600; font-size: 12px; color: #555;">Locali utilizzati:</div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="locali" value="30" id="loc1" onchange="calcolaTotale()">
+                <label for="loc1">interno (grande fienile) e servizi</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">30 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="locali" value="30" id="loc2" onchange="calcolaTotale()">
+                <label for="loc2">solo esterno e servizi, nessun accesso al grande fienile</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">30 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="radio" name="locali" value="60" id="loc3" onchange="calcolaTotale()">
+                <label for="loc3">interni, esterni e servizi</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">60 €</span></div>
+        </div>
+
+        <!-- Totale PagoPA Parziale -->
+        <div class="total-box">
+            <span>TOTALE PAGOPA</span>
+            <span id="totale_pagopa">0,00 €</span>
+        </div>
+
+        <!-- 3) Servizi EXTRA -->
+        <div class="section-title">3) Servizi EXTRA</div>
+        
+        <div class="row-item">
+            <div class="left-zone">
+                <input type="checkbox" id="pulizia_finale" value="100" onchange="calcolaTotale()">
+                <label for="pulizia_finale">Pulizia finale e igienizzazione</label>
+            </div>
+            <div class="right-zone"><span class="price-tag">100 €</span></div>
+        </div>
+        <div class="row-item">
+            <div class="left-zone">
+                <span style="padding-left: 24px;">Ore extra richieste oltre lo slot (50 €/h)</span>
+            </div>
+            <div class="right-zone">
+                <input type="number" id="ore_extra" class="input-qty" min="0" value="0" placeholder="Ore" oninput="calcolaTotale()">
+                <span class="price-tag" id="prezzo_ore_extra">0,00 €</span>
+            </div>
+        </div>
+        <div class="row-item" style="font-weight: 600;">
+            <div class="left-zone"><span style="padding-left: 24px;">Deposito cauzionale (fisso, rimborsabile)</span></div>
+            <div class="right-zone"><span class="price-tag">300,00 €</span></div>
+        </div>
+
+        <!-- Prezzo Totale Affitto Complessivo -->
+        <div class="total-box grand-total-box">
+            <span>PREZZO TOTALE AFFITTO (Incluso Deposito)</span>
+            <span id="prezzo_totale_affitto">300,00 €</span>
+        </div>
+
+        <!-- Pulsante di Invio e Stampa -->
+        <div class="btn-container">
+            <button type="button" class="btn-submit" onclick="inviaEStampa()">Invia Prenotazione e Stampa PDF</button>
+        </div>
+    </form>
+</div>
+
+<script>
+function calcolaTotale() {
+    // 1) Tariffa Base
+    let tariffaBase = 0;
+    const rbTariffa = document.getElementsByName('tariffa_base');
+    let tariffaSelezionata = '';
+    for (let r of rbTariffa) {
+        if (r.checked) {
+            tariffaSelezionata = r.id;
+            if (r.id === 'tb4') {
+                let oreCorte = parseFloat(document.getElementById('ore_corte').value) || 0;
+                tariffaBase = oreCorte * 50;
+            } else {
+                tariffaBase = parseFloat(r.value);
+            }
+            break;
+        }
+    }
+
+    // Abilita/Disabilita input ore corte
+    document.getElementById('ore_corte').disabled = (tariffaSelezionata !== 'tb4');
+
+    // 2) Variabili Logistiche - Invitati
+    let quotaInvitati = 0;
+    const rbInvitati = document.getElementsByName('invitati');
+    for (let r of rbInvitati) {
+        if (r.checked) {
+            quotaInvitati = parseFloat(r.value);
+            break;
+        }
+    }
+
+    // Variabili Logistiche - Servizi Energetici
+    let quotaEnergia = 0;
+    if (document.getElementById('allaccio_energetico').checked) quotaEnergia += 10;
+    if (document.getElementById('riscaldamento_die').checked) quotaEnergia += 30;
+    
+    let riscaldaOraChecked = document.getElementById('riscaldamento_ora').checked;
+    document.getElementById('ore_riscaldamento').disabled = !riscaldaOraChecked;
+    if (riscaldaOraChecked) {
+        let oreRiscaldamento = parseFloat(document.getElementById('ore_riscaldamento').value) || 0;
+        quotaEnergia += oreRiscaldamento * 10;
+    }
+
+    // Variabili Logistiche - Locali
+    let quotaLocali = 0;
+    const rbLocali = document.getElementsByName('locali');
+    for (let r of rbLocali) {
+        if (r.checked) {
+            quotaLocali = parseFloat(r.value);
+            break;
+        }
+    }
+
+    // Calcolo Parziale PagoPA
+    let totalePagoPA = tariffaBase + quotaInvitati + quotaEnergia + quotaLocali;
+    document.getElementById('totale_pagopa').innerText = totalePagoPA.toFixed(2).replace('.', ',') + ' €';
+
+    // 3) Servizi EXTRA
+    let quotaExtra = 0;
+    if (document.getElementById('pulizia_finale').checked) quotaExtra += 100;
+
+    let oreExtra = parseFloat(document.getElementById('ore_extra').value) || 0;
+    let costoOreExtra = oreExtra * 50;
+    document.getElementById('prezzo_ore_extra').innerText = costoOreExtra.toFixed(2).replace('.', ',') + ' €';
+    quotaExtra += costoOreExtra;
+
+    let depositoCauzionale = 300;
+
+    // Prezzo Totale Affitto Complessivo
+    let prezzoTotaleAffitto = totalePagoPA + quotaExtra + depositoCauzionale;
+    document.getElementById('prezzo_totale_affitto').innerText = prezzoTotaleAffitto.toFixed(2).replace('.', ',') + ' €';
+}
+
+function inviaEStampa() {
+    // Avvia la stampa nativa del browser (che grazie ai CSS @media print formatterà tutto su una singola pagina A4)
+    window.print();
+}
+
+// Inizializzazione controlli disabilitati
+window.onload = function() {
+    calcolaTotale();
+};
+</script>
+
+</body>
+</html>
