@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventivatore Corte Castello - Casalmoro</title>
+    <style>
+        :root {
+            --primary-color: #800020; /* Elegante Bordeaux */
+            --accent-color: #b8860b;  /* Oro Antico */
+            --bg-color: #fcfbf7;       /* Avorio leggero */
+            --text-color: #2c2520;
+            --border-color: #dcd6cd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(252, 251, 247, 0.92), rgba(252, 251, 247, 0.92)), 
+                              url('https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.96);
+            width: 100%;
+            max-width: 800px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(128, 0, 32, 0.1);
+            border-radius: 12px;
+            box-sizing: border-box;
+            border: 1px solid rgba(184, 134, 11, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            margin-bottom: 3px;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 3px;
+            font-weight: 600;
+            color: #4a3f35;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 13px;
+            background-color: #fff;
+            color: var(--text-color);
+        }
+
+        .row-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dashed #e6e0d8;
+        }
+
+        .row-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .row-right {
+            font-weight: 700;
+            min-width: 60px;
+            text-align: right;
+            color: var(--primary-color);
+            font-size: 13px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: var(--primary-color);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .qty-input {
+            width: 50px !important;
+            padding: 2px 4px !important;
+            margin-left: 6px;
+            text-align: center;
+            border-color: var(--border-color);
+        }
+
+        .sub-label {
+            margin: 8px 0 2px 0; 
+            font-weight: 700; 
+            font-size: 12px; 
+            color: var(--primary-color);
+        }
+
+        .note {
+            font-size: 10.5px;
+            color: #7a6e65;
+            font-style: italic;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .total-box {
+            background: linear-gradient(145deg, #fffbf5, #f5efe4);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid rgba(184, 134, 11, 0.3);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13.5px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #4a3f35;
+        }
+
+        .total-row.final {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary-color);
+            border-top: 2px dashed rgba(128, 0, 32, 0.2);
+            padding-top: 8px;
+            margin-bottom: 0;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), #5c0017);
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.2);
+        }
+
+        /* Forza la visualizzazione su una sola facciata A4 */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 5mm 8mm 5mm 8mm; /* Margini minimi salvaziazio */
+            }
+            html, body {
+                height: 100%;
+                overflow: hidden;
+                background: white !important;
+                background-image: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                color: #000 !important;
+                font-size: 11px !important;
+            }
+            .container {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                background: white !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 100% !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            h1 {
+                color: #000 !important;
+                font-size: 18px !important;
+                border-bottom: 2px solid #000 !important;
+                padding-bottom: 3px;
+                margin-bottom: 2px;
+            }
+            .subtitle {
+                color: #555 !important;
+                margin-bottom: 10px !important;
+                font-size: 10px !important;
+            }
+            .section {
+                margin-bottom: 10px !important;
+                page-break-inside: avoid;
+            }
+            .section-title {
+                color: #000 !important;
+                border-bottom: 1.5px solid #000 !important;
+                font-size: 11px !important;
+                margin-bottom: 4px !important;
+                padding-bottom: 2px !important;
+            }
+            .row-item {
+                padding: 3px 0 !important;
+                border-bottom: 1px dashed #ccc !important;
+            }
+            .row-right {
+                color: #000 !important;
+                font-size: 11px !important;
+            }
+            .sub-label {
+                margin: 5px 0 2px 0 !important;
+                font-size: 11px !important;
+            }
+            .btn-container, input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+                display: none !important;
+            }
+            input[type="text"], input[type="email"], input[type="date"], input[type="number"] {
+                border: none !important;
+                border-bottom: 1px dashed #000 !important;
+                border-radius: 0 !important;
+                padding: 1px 0 !important;
+                background: transparent !important;
+                font-size: 11px !important;
+            }
+            .qty-input {
+                border: 1px solid #000 !important;
+                width: 30px !important;
+            }
+            .total-box {
+                background: #fff !important;
+                border: 1px solid #000 !important;
+                border-left: 5px solid #000 !important;
+                margin-top: 10px !important;
+                padding: 8px !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .total-row {
+                font-size: 11px !important;
+                margin-bottom: 3px !important;
+            }
+            .total-row.final {
+                color: #000 !important;
+                font-size: 13px !important;
+                border-top: 1px solid #000 !important;
+                padding-top: 5px !important;
+            }
+            .note {
+                font-size: 9px !important;
+                margin-top: 2px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <h1>Corte Castello</h1>
+        <div class="subtitle">Scheda di Calcolo e Prenotazione Spazi — Casalmoro</div>
+        
+        <!-- Sezione Anagrafica -->
+        <div class="section">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Cognome e Nome richiedente</label>
+                    <input type="text" value=" ">
+                </div>
+                <div class="form-group">
+                    <label>Recapito Cellulare</label>
+                    <input type="text" value=" ">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Indirizzo Email</label>
+                    <input type="email" value=" ">
+                </div>
+                <div class="form-group">
+                    <label>Data prevista per l'evento</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+
+        <form id="preventivoForm">
+            <!-- 1) Tariffa Base -->
+            <div class="section">
+                <div class="section-title">1) Tariffa base (Selezionare una sola opzione)</div>
+                
+                               
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="tariffa_base" value="150" id="t2" onchange="calcolaTotale()">
+                        <label for="t2">Evento Aziendale/Commerciale *</label>
+                    </div>
+                    <div class="row-right">150 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="tariffa_base" value="100" id="t3" onchange="calcolaTotale()">
+                        <label for="t3">Festa privata *</label>
+                    </div>
+                    <div class="row-right">100 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="tariffa_base" value="50" id="t4" onchange="calcolaTotale()">
+                        <label for="t4">Uso esclusivo Corte Castello (Tariffa oraria)</label>
+                        <input type="number" id="ore_corte" class="qty-input" min="0" value="0" oninput="calcolaTotale()"> <span style="font-size:11px; font-weight:600;">ore</span>
+                    </div>
+                    <div class="row-right">50 €/h</div>
+                </div>
+                <div class="note">(*) La tariffa giornaliera comprende gli slot orari dedicati alle operazioni preventive di allestimento e al successivo sgombero.</div>
+
+                <div class="row-item" style="margin-top:8px; border-bottom:none;">
+                    <div class="row-left">
+                        <span style="font-size:13px; font-weight:700; color:var(--primary-color);">Deposito cauzionale <em style="font-weight:400; color:#7a6e65;">(obbligatorio, sempre incluso)</em></span>
+                    </div>
+                    <div class="row-right">300 €</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">2) Variabili logistiche ed utenze</div>
+                
+             
+
+                <div class="sub-label">Fascia complessiva numero invitati:</div>
+                
+               
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="invitati" value="50" id="i2" onchange="calcolaTotale()">
+                        <label for="i2">Fino a un massimo di 50 persone</label>
+                    </div>
+                    <div class="row-right">50 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="invitati" value="100" id="i3" onchange="calcolaTotale()">
+                        <label for="i3">Fino a un massimo di 100 persone</label>
+                    </div>
+                    <div class="row-right">100 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="radio" name="invitati" value="200" id="i4" onchange="calcolaTotale()">
+                        <label for="i4">Fino a un massimo di 200 persone</label>
+                    </div>
+                    <div class="row-right">200 €</div>
+                </div>
+
+                <div class="sub-label">Servizi energetici e climatizzazione:</div>
+
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="checkbox" id="allaccio" value="10" onchange="calcolaTotale()">
+                        <label for="allaccio">Allaccio energetico supplementare (380 Volt)</label>
+                    </div>
+                    <div class="row-right">10 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="checkbox" id="risc_die" value="20" onchange="calcolaTotale()">
+                        <label for="risc_die">Servizio riscaldamento / condizionamento (Quota fissa pro die)</label>
+                    </div>
+                    <div class="row-right">20 €</div>
+                </div>
+                
+                
+
+                
+            </div>
+
+            <div class="section">
+                <div class="section-title">3) Servizi e EXTRA</div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <span style="font-size:13px; font-weight:600;">Intervento di pulizia finale ordinaria e igienizzazione ambienti <em style="font-weight:400; color:#7a6e65;">(obbligatorio)</em></span>
+                    </div>
+                    <div class="row-right">100 €</div>
+                </div>
+                
+                <div class="row-item">
+                    <div class="row-left">
+                        <input type="checkbox" id="attrezzatura_pro_loco" value="150" onchange="calcolaTotale()">
+                        <label for="attrezzatura_pro_loco">Attrezzatura PRO LOCO: tavoli, panche, frigoriferi, freezer e smaltimento rifiuti (differenziati)</label>
+                    </div>
+                    <div class="row-right">150 €</div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <div class="total-box">
+            <div class="total-row final" style="border-top:none; padding-top:0;">
+                <span>PREZZO TOTALE COMPLESSIVO (AFFITTO + CAUZIONE):</span>
+                <span id="prezzoTotaleAffitto">400,00 €</span>
+            </div>
+        </div>
+
+        <div class="total-box" style="margin-top:10px;">
+            <div class="total-row final">
+                <span>A favore del <strong>Comune di Casalmoro</strong>:</span>
+                <span id="totaleComune">0,00 €</span>
+            </div>
+            <div class="total-row final">
+                <span>A favore della <strong>PRO LOCO CASALMORO</strong> (EXTRA + cauzione):</span>
+                <span id="totaleProLoco">400,00 €</span>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn" onclick="window.print()">Invia Prenotazione e Stampa PDF</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function calcolaTotale() {
+    let totaleComune = 0;
+    let totaleProLoco = 0;
+
+    // 1) Tariffa Base → Comune
+    const tariffaSelezionata = document.querySelector('input[name="tariffa_base"]:checked');
+    if (tariffaSelezionata) {
+        if (tariffaSelezionata.id === "t4") {
+            let oreCorte = parseFloat(document.getElementById('ore_corte').value) || 0;
+            totaleComune += oreCorte * 50;
+        } else {
+            totaleComune += parseFloat(tariffaSelezionata.value);
+        }
+    }
+
+    // 2) Fascia Invitati → Comune
+    const invitatiSelezionati = document.querySelector('input[name="invitati"]:checked');
+    if (invitatiSelezionati) {
+        totaleComune += parseFloat(invitatiSelezionati.value);
+    }
+
+    // Utenze → Comune
+    if (document.getElementById('allaccio').checked) totaleComune += 10;
+    if (document.getElementById('risc_die').checked) totaleComune += 20;
+
+    // 3) EXTRA → PRO LOCO (pulizia obbligatoria)
+    totaleProLoco += 100;
+    if (document.getElementById('attrezzatura_pro_loco').checked) {
+        totaleProLoco += 150;
+    }
+
+    let depositoCauzionale = 300;
+    let totaleProLocoConCauzione = totaleProLoco + depositoCauzionale;
+    let prezzoTotaleAffitto = totaleComune + totaleProLoco + depositoCauzionale;
+
+    document.getElementById('prezzoTotaleAffitto').innerText = prezzoTotaleAffitto.toFixed(2).replace('.', ',') + " €";
+    document.getElementById('totaleComune').innerText = totaleComune.toFixed(2).replace('.', ',') + " €";
+    document.getElementById('totaleProLoco').innerText = totaleProLocoConCauzione.toFixed(2).replace('.', ',') + " €";
+}
+
+document.addEventListener('DOMContentLoaded', calcolaTotale);
+</script>
+
+</body>
+</html>
